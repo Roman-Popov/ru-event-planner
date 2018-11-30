@@ -1,0 +1,196 @@
+:local(.wrapper) {
+    --initialColor: #1d0066;
+    --width: calc(100px * 1.732);
+    --baseVal: calc(var(--width) / 1.732);
+    --bgColor: #1d0066;
+    --logoColor: white;
+    --shadowColor: red;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 0;
+}
+
+:local(.logo) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: calc(var(--baseVal) / 100 * 16);
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    position: relative;
+    background-color: var(--bgColor);
+    height: var(--baseVal);
+    width: var(--width);
+    margin: calc(var(--width) / 2 * 0.58 + var(--width) * 0.05)
+            calc(var(--baseVal) * (1.82 - 1.74) / 2 + var(--width) * 0.05);
+    z-index: unset;
+}
+
+:local(.logo.big) {
+    margin-right: 10em;
+}
+
+:local(.logo.tiny) {
+    width: calc(var(--width) * 0.6);
+    height: calc(var(--baseVal) * 0.8);
+    margin: calc(var(--width) * 0.05);
+    transition: box-shadow 0.5s;
+}
+
+:local(.logo:not(.tiny)::before) {
+    --diameter: calc(var(--baseVal) * 1.82);
+    content: '';
+    display: block;
+    position: absolute;
+    z-index: -1;
+    width: var(--diameter);
+    height: var(--diameter);
+    background-color: inherit;
+    border-radius: 50% !important;
+    padding: 0 !important;
+    box-shadow: none;
+    transition: transform 0.25s 0.25s, box-shadow 0.5s;
+}
+
+:local(.logo::after) {
+    content: 'WEB DEVELOPER';
+    font-size: 120%;
+    text-align: left;
+    left: 100%;
+    padding-left: 15%;
+    display: block;
+    position: absolute;
+    z-index: -1;
+    color: var(--bgColor);
+    overflow: hidden;
+    transform-origin: 0;
+    transform: scaleX(0);
+    transition: transform 0.25s;
+}
+
+:local(.logo.tiny::after),
+:local(.logo.medium::after),
+:local(.logo.small::after) {
+    content: none;
+}
+
+:local(.logo:not(.tiny) .hex-corner) {
+    box-sizing: border-box;
+    background-color: inherit;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+:local(.hex-pt1) {
+    transform: rotate(60deg);
+}
+
+:local(.hex-pt2) {
+    transform: rotate(-60deg);
+}
+
+:local(.letter) {
+    --borderWidth: calc(var(--baseVal) / 20);
+    position: absolute;
+    top: 10%;
+    margin: 0;
+    border: var(--borderWidth) solid var(--logoColor);
+    box-sizing: border-box;
+    height: 80%;
+    width: 30%;
+    font-size: 200%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition: top 0.25s 0.5s, height 0.25s 0.5s, font-size 0.25s 0.5s, left 0.25s 0.25s, width 0.25s;
+}
+
+:local(.logo.tiny .letter) {
+    top: 0;
+    height: 100%;
+}
+
+:local(.letter .name) {
+    max-width: 0;
+    overflow: hidden;
+    transition: max-width 0.25s;
+}
+
+:local(.letter:first-of-type) {
+    left: 20%;
+    background: var(--logoColor);
+    color: var(--bgColor);
+}
+
+:local(.logo.tiny .letter:first-of-type) {
+    left: 0;
+    width: 50%;
+}
+
+:local(.letter:last-of-type) {
+    width: calc(30% + var(--borderWidth));
+    left: calc(50% - var(--borderWidth));
+    color: var(--logoColor);
+}
+
+:local(.logo.tiny .letter:last-of-type) {
+    width: calc(50% + var(--borderWidth));
+}
+
+:local(.logo.tiny:hover) {
+    box-shadow: 0 0 calc(var(--baseVal) * 0.15) var(--shadowColor);
+}
+
+:local(.logo:hover::before),
+:local(.logo).focused::before {
+    transition: transform 0.25s 0.1s, box-shadow 0.15s 0.6s;
+    transform: scale(0.9);
+    box-shadow: 0 0 calc(var(--baseVal) * 0.75) var(--shadowColor);
+    top: unset !important;
+    left: unset !important;
+}
+
+:local(.logo).focused::before {
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+
+:local(.logo:hover:not(.small):not(.tiny):not(.medium)::after),
+:local(.logo.big::after) {
+    max-width: var(--width);
+    transform: scaleX(1);
+    transition: transform 0.15s 0.6s;
+}
+
+:local(.logo:not(.small):not(.tiny):hover .letter),
+:local(.logo.big .letter) {
+    width: 60%;
+    height: 50%;
+    font-size: 130%;
+    transition: top 0.25s, height 0.25s, font-size 0.25s, left 0.25s 0.25s, width 0.25s 0.5s;
+}
+
+:local(.logo:not(.small):not(.tiny):hover .letter:first-of-type),
+:local(.logo.big .letter:first-of-type) {
+    top: 0;
+}
+
+:local(.logo:not(.small):not(.tiny):hover .letter:last-of-type),
+:local(.logo.big .letter:last-of-type) {
+    top: calc(50% - var(--borderWidth));
+    height: calc(50% + var(--borderWidth));
+    left: 20%;
+}
+
+:local(.logo:not(.small):not(.tiny):hover .letter .name),
+:local(.logo.big .letter .name) {
+    max-width: 100%;
+    transition: max-width 0.25s 0.75s;
+}
